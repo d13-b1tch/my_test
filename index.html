@@ -2,24 +2,24 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Тест для себя</title>
+  <title>Анкета — Вы</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Тест: Насколько вы совместимы?</h1>
-  <form action="results.html" method="get">
-    <label>Ваше имя или псевдоним:<br><input type="text" name="name"></label><br><br>
-    <label>Ваш тип личности (MBTI):<br><input type="text" name="mbti"></label><br><br>
-    <label>Ваш темперамент:<br>
-      <select name="temper">
-        <option>Сангвиник</option>
-        <option>Холерик</option>
-        <option>Флегматик</option>
-        <option>Меланхолик</option>
-      </select>
-    </label><br><br>
-    <label>Ваш рост (в см):<br><input type="number" name="height"></label><br><br>
-    <label>Ваш вес (в кг):<br><input type="number" name="weight"></label><br><br>
-    <input type="submit" value="Сохранить и продолжить">
+  <h1>Тест для вас</h1>
+  <form id="userForm">
+    <label>Псевдоним: <input type="text" name="nickname" required></label><br>
+    <label>MBTI: <input type="text" name="mbti"></label><br>
+    <label>Темперамент: <input type="text" name="temperament"></label><br>
+    <label>Рост (см): <input type="number" name="height"></label><br>
+    <label>Вес (кг): <input type="number" name="weight"></label><br>
+    <label>Цель в жизни: <input type="text" name="goal"></label><br>
+    <label>Любимая еда: <input type="text" name="food"></label><br>
+    <label>Ваш характер: <input type="text" name="personality"></label><br>
+    <button type="submit">Сохранить</button>
   </form>
+  <a href="partner.html">Перейти к анкете партнёра</a>
+  <script src="script.js"></script>
 </body>
 </html>
+
