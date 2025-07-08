@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Результаты</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Ваши результаты готовы</h1>
-  <p>На этой странице в будущем будет сравнительный анализ совместимости и кнопка скачать PDF или DOCX.</p>
-  <p>Пока что просто переходите назад или отправьте партнёру ссылку на <code>partner.html</code>.</p>
+  <h1>Итоги совместимости</h1>
+  <div id="result"></div>
+  <button onclick="downloadResult()">Скачать результат (PNG)</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
