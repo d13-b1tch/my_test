@@ -1,15 +1,82 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Результаты</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <title>Итоги совместимости</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Итоги совместимости</h1>
-  <div id="result"></div>
-  <button onclick="downloadResult()">Скачать результат (PNG)</button>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <header class="topbar">
+    <h1>Тест совместимости — Итоги</h1>
+    <nav>
+      <a href="index.html">Вы</a>
+      <a href="partner.html">Партнёр</a>
+      <a href="results.html" class="active">Итоги</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <div class="flex">
+      <div class="grow">
+        <h2>Ваши данные</h2>
+        <pre id="youPreview" class="preview"></pre>
+      </div>
+      <div class="grow">
+        <h2>Данные партнёра</h2>
+        <pre id="partnerPreview" class="preview"></pre>
+      </div>
+    </div>
+
+    <div class="share">
+      <div>
+        <h3>Экспорт/импорт кода ответов</h3>
+        <button id="copyUser" class="small">Скопировать мой код</button>
+        <button id="copyPartner" class="small">Скопировать код партнёра</button>
+      </div>
+      <div class="paste">
+        <textarea id="pasteArea" placeholder="Вставьте код ответов второй стороны здесь"></textarea>
+        <button id="importAsPartner" class="small">Импортировать как партнёра</button>
+        <button id="importAsMe" class="small">Импортировать как меня</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="reportCard" class="card">
+    <div id="reportHeader"></div>
+    <div id="reportBody"></div>
+  </section>
+
+  <div class="actions">
+    <button id="savePNG" class="secondary">Скачать PNG</button>
+    <button id="savePDF" class="primary">Скачать PDF</button>
+  </div>
+
+  <footer class="footnote">
+    Если видно только «Ваши данные» — это одиночный режим. Советы основаны на ваших ответах.
+  </footer>
+
+  <!-- Библиотеки экспорта -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      CT.renderResults();
+      const copyUserBtn = document.getElementById("copyUser");
+      if (copyUserBtn) copyUserBtn.onclick = () => CT.copyCode("ct_user");
+      const copyPartnerBtn = document.getElementById("copyPartner");
+      if (copyPartnerBtn) copyPartnerBtn.onclick = () => CT.copyCode("ct_partner");
+      const importAsPartnerBtn = document.getElementById("importAsPartner");
+      if (importAsPartnerBtn) importAsPartnerBtn.onclick = () => CT.importCode("ct_partner", document.getElementById("pasteArea").value);
+      const importAsMeBtn = document.getElementById("importAsMe");
+      if (importAsMeBtn) importAsMeBtn.onclick = () => CT.importCode("ct_user", document.getElementById("pasteArea").value);
+      const savePngBtn = document.getElementById("savePNG");
+      if (savePngBtn) savePngBtn.onclick = () => CT.exportPNG("reportCard");
+      const savePdfBtn = document.getElementById("savePDF");
+      if (savePdfBtn) savePdfBtn.onclick = () => CT.exportPDF("reportCard");
+    });
+  </script>
 </body>
 </html>
