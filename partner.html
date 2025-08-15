@@ -1,24 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <title>Анкета — Партнёр</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Тест для партнёра</h1>
-  <form id="partnerForm">
-    <label>Псевдоним партнёра: <input type="text" name="nickname" required></label><br>
-    <label>MBTI: <input type="text" name="mbti"></label><br>
-    <label>Темперамент: <input type="text" name="temperament"></label><br>
-    <label>Рост (см): <input type="number" name="height"></label><br>
-    <label>Вес (кг): <input type="number" name="weight"></label><br>
-    <label>Цель в жизни: <input type="text" name="goal"></label><br>
-    <label>Любимая еда: <input type="text" name="food"></label><br>
-    <label>Характер: <input type="text" name="personality"></label><br>
-    <button type="submit">Сохранить</button>
-  </form>
-  <a href="results.html">Перейти к результатам</a>
+  <header class="topbar">
+    <h1>Тест совместимости — Партнёр</h1>
+    <nav>
+      <a href="index.html">Вы</a>
+      <a href="partner.html" class="active">Партнёр</a>
+      <a href="results.html">Итоги</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <div id="formContainer"></div>
+    <div class="actions">
+      <button id="savePartner" class="primary">Сохранить ответы</button>
+      <a href="results.html" class="link-btn">Перейти к итогам</a>
+    </div>
+  </section>
+
+  <footer class="footnote">Подсказка: если партнёр заполняет с другого устройства — используйте обмен кодом на странице «Итоги».</footer>
+
   <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      CT.setMode("pair");
+      CT.buildForm("formContainer", "ct_partner");
+      document.getElementById("savePartner").addEventListener("click", () => CT.saveForm("ct_partner"));
+    });
+  </script>
 </body>
 </html>
