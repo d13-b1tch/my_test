@@ -1,25 +1,54 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Анкета — Вы</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <title>Анкета — Вы / Одиночный режим</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Тест для вас</h1>
-  <form id="userForm">
-    <label>Псевдоним: <input type="text" name="nickname" required></label><br>
-    <label>MBTI: <input type="text" name="mbti"></label><br>
-    <label>Темперамент: <input type="text" name="temperament"></label><br>
-    <label>Рост (см): <input type="number" name="height"></label><br>
-    <label>Вес (кг): <input type="number" name="weight"></label><br>
-    <label>Цель в жизни: <input type="text" name="goal"></label><br>
-    <label>Любимая еда: <input type="text" name="food"></label><br>
-    <label>Ваш характер: <input type="text" name="personality"></label><br>
-    <button type="submit">Сохранить</button>
-  </form>
-  <a href="partner.html">Перейти к анкете партнёра</a>
+  <header class="topbar">
+    <h1>Тест совместимости — Анкета</h1>
+    <nav>
+      <a href="index.html" class="active">Вы</a>
+      <a href="partner.html">Партнёр</a>
+      <a href="results.html">Итоги</a>
+    </nav>
+  </header>
+
+  <section class="card">
+    <div class="mode-row">
+      <span>Режим:</span>
+      <label class="mode"><input type="radio" name="mode" value="solo" checked> Одиночный</label>
+      <label class="mode"><input type="radio" name="mode" value="pair"> Парный</label>
+    </div>
+
+    <div id="formContainer"></div>
+
+    <div class="actions">
+      <button id="saveUser" class="primary">Сохранить ответы</button>
+      <a href="results.html" class="link-btn">Перейти к итогам</a>
+      <a id="goPartner" href="partner.html" class="link-btn hidden">Перейти к анкете партнёра</a>
+    </div>
+  </section>
+
+  <footer class="footnote">Числа меняются кнопками «− / +». Строки — через выпадающие списки.</footer>
+
   <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      CT.buildForm("formContainer", "ct_user");
+      const goPartner = document.getElementById("goPartner");
+      document.querySelectorAll('input[name="mode"]').forEach(r => {
+        r.addEventListener("change", e => {
+          const isPair = e.target.value === "pair";
+          CT.setMode(isPair ? "pair" : "solo");
+          goPartner.classList.toggle("hidden", !isPair);
+        });
+      });
+      CT.setMode("solo");
+      document.getElementById("saveUser").addEventListener("click", () => CT.saveForm("ct_user"));
+    });
+  </script>
 </body>
 </html>
-
